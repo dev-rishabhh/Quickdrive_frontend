@@ -20,7 +20,7 @@ function DirectoryHeader({
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userName, setUserName] = useState("Guest User");
-  const [userEmail, setUserEmail] = useState("guest@example.com");
+  const [userEmail, setUserEmail] = useState("guest@email.com");
   const [userPicture, setUserPicture] = useState("");
   const [usedStorageinBytes, setusedStorageinBytes] = useState(0);
   const [maxStorageinBytes, setmaxStorageinBytes] = useState(0);

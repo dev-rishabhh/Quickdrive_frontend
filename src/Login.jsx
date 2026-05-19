@@ -12,7 +12,7 @@ const Login = () => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   const [formData, setFormData] = useState({
-    email: "rishabh@gmail.com",
+    email: "rishabhpandey2963@gmail.com",
     password: "1234",
   });
 

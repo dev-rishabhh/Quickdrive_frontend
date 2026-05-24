@@ -37,9 +37,14 @@ jobs:
             echo "Building files"
             npm run build
 
-            echo "path"
-            echo pwd
+            echo "Moving to dist folder"
+            cd /var/www/
+
+            echo "Deleting dist folder"
+            sudo rm -rf dist
             
+            echo "Moving to Frontend"
+            cd /home/ubuntu/Quickdrive_frontend 
 
             echo "Moving dist folder"
             sudo mv dist  /var/www/

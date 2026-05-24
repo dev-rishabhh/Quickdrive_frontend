@@ -18,7 +18,7 @@ function DirectoryView() {
   const [errorMessage, setErrorMessage] = useState("");
 
   // Displayed directory name
-  const [directoryName, setDirectoryName] = useState("My Drive");
+  const [directoryName, setDirectoryName] = useState("Home");
 
   // Lists of items
   const [directoriesList, setDirectoriesList] = useState([]);

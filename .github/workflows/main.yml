@@ -37,8 +37,12 @@ jobs:
             echo "Building files"
             npm run build
 
+            echo "path"
+            echo pwd
+            
+
             echo "Moving dist folder"
-            sudo mv dist  var/www/
+            sudo mv dist  /var/www/
 
             echo "Reloading Nginx"
             sudo systemctl reload nginx

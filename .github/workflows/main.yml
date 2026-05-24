@@ -1,0 +1,48 @@
+name: Deploy StorageApp Frontend
+
+on: [push, workflow_dispatch]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      SSH_HOST: 13.234.238.3
+      SSH_USER: ubuntu
+      REMOTE_APP_DIR: /home/ubuntu/Quickdrive_frontend  
+
+    steps:
+      # 1. Setup SSH key and known_hosts
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+          # Add server host key so SSH does not ask for confirmation
+          ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts
+
+      # 2. Deploy to remote server
+      - name: Deploy Frontend on EC2
+        run: |
+          ssh "${SSH_USER}@${SSH_HOST}" 'bash -s' << 'EOF'
+            set -e
+
+            cd /home/ubuntu/Quickdrive_frontend 
+            git pull
+
+            echo "Installing backend dependencies (npm ci)..."
+            npm ci --no-audit --no-fund
+
+            echo "Building files"
+            npm run build
+
+            echo "Moving dist folder"
+            mv dist/  var/www/
+
+            echo "Reloading Nginx"
+            sudo systemctl reload nginx
+
+            echo "Frontend Deployed Successfully..."
+          EOF
+

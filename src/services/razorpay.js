@@ -14,7 +14,7 @@ export function openRazorpayPopup({ subscriptionId }) {
         handler: async function (response) {
             // const razorpay_subscription_id
             console.log(response);
-            await subscriptionComplete(response.razorpay_subscription_id)
+            // await subscriptionComplete(response.razorpay_subscription_id)
         },
     });
 

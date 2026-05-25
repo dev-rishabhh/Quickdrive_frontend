@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Plans.css"
 import { openRazorpayPopup, subscriptionInitiate } from "./services/razorpay";
 
@@ -161,29 +161,33 @@ function PlanCard({ plan, onSelect }) {
 }
 
 export default function Plans() {
+  const navigate = useNavigate()
   const [mode, setMode] = useState("monthly");
+  // const [Paymentverified, setPaymentverified] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("");
   const plans = PLAN_CATALOG[mode];
 
-   useEffect(() => {
-      const razorpayScript = document.querySelector("#razorpay-script");
-      if (razorpayScript) return;
-      const script = document.createElement("script");
-      script.src = "https://checkout.razorpay.com/v1/checkout.js";
-      script.async = true;
-      script.id = "razorpay-script";
-      document.body.appendChild(script);
-    }, []);
+  useEffect(() => {
+    const razorpayScript = document.querySelector("#razorpay-script");
+    if (razorpayScript) return;
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    script.id = "razorpay-script";
+    document.body.appendChild(script);
+  }, []);
 
   async function handleSelect(plan) {
-    const {subscriptionId} = await subscriptionInitiate({planId :plan.id})
+    const { subscriptionId } = await subscriptionInitiate({ planId: plan.id })
     // console.log(subscriptionId);
-    openRazorpayPopup({subscriptionId})
-
+    openRazorpayPopup({ subscriptionId })
+    setTimeout(() => setErrorMessage(""), 3000);
     // console.log(plan.id);
   }
 
   return (
     <div className="plans-container">
+      <div className="error-message">{errorMessage}</div>
       <header className="plans-header">
         <h1 className="main-title">Choose your plan</h1>
         <Link to="/">Home</Link>

@@ -1,7 +1,5 @@
-
-export function openRazorpayPopup({ subscriptionId }) {
+export function openRazorpayPopup({ subscriptionId}) {
     // console.log(subscriptionId);
-
     const rzp = new Razorpay({
         // key: "rzp_test_StTVj0vLAAdSBp",
         key: import.meta.env.VITE_RAZORPAY_KEY,
@@ -9,7 +7,13 @@ export function openRazorpayPopup({ subscriptionId }) {
         name: "Quickdrive",
         subscription_id: subscriptionId,
         handler: async function (response) {
-            console.log(response);
+            // console.log(response);
+            // console.log(response.razorpay_subscription_id);
+            const res = await subscriptionComplete(response.razorpay_subscription_id)
+            console.log(res);
+            if(res.ok){
+                window.location.href = "/"
+            }
         },
     });
 
@@ -35,6 +39,20 @@ export async function subscriptionInitiate({ planId }) {
 
     const data = await res.json()
     return data
+}
+
+async function subscriptionComplete( subscriptionId ) {
+    const res = await fetch(`${import.meta.env.VITE_BASE_URL}/subscriptions/complete`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            subscriptionId
+        }),
+        credentials: "include"
+    })
+    return res
 }
 
 

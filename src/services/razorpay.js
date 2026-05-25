@@ -4,7 +4,7 @@ export function openRazorpayPopup({ subscriptionId }) {
 
     const rzp = new Razorpay({
         // key: "rzp_test_StTVj0vLAAdSBp",
-        key: import.meta.env.VITE_VITE_RAZORPAY_KEY,
+        key: import.meta.env.VITE_RAZORPAY_KEY,
         description: "Upgrade storage limit",
         name: "Quickdrive",
         subscription_id: subscriptionId,

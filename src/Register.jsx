@@ -12,9 +12,9 @@ const Register = () => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   const [formData, setFormData] = useState({
-    name: "Rishabh Pandey",
-    email: "rishabh@gmail.com",
-    password: "1234",
+    name: "",
+    email: "",
+    password: "",
   });
 
   // serverError will hold the error message from the server

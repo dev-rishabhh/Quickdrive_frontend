@@ -12,8 +12,8 @@ const Login = () => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   const [formData, setFormData] = useState({
-    email: "rishabhpandey2963@gmail.com",
-    password: "1234",
+    email: "",
+    password: "",
   });
 
   // serverError will hold the error message from the server
@@ -100,7 +100,7 @@ const Login = () => {
       } else {
         // On success, navigate to home or any other protected route
         // navigate("/login");
-        console.log(data)
+        // console.log(data)
       }
     } catch (error) {
       setServerError(data.error);

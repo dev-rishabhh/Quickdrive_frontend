@@ -65,7 +65,7 @@ const ProfileDashboard = () => {
                 credentials: "include",
             });
             if (response.ok) {
-                console.log("Logged out successfully");
+                // console.log("Logged out successfully");
                 // Optionally reset local state
                 // setLoggedIn(false);
                 setUserName("Guest User");
@@ -88,7 +88,7 @@ const ProfileDashboard = () => {
                 credentials: "include",
             });
             if (response.ok) {
-                console.log("Logged out successfully");
+                // console.log("Logged out successfully");
                 // Optionally reset local state
                 // setLoggedIn(false);
                 setUserName("Guest User");

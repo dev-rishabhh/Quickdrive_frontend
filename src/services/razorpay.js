@@ -10,7 +10,7 @@ export function openRazorpayPopup({ subscriptionId}) {
             // console.log(response);
             // console.log(response.razorpay_subscription_id);
             const res = await subscriptionComplete(response.razorpay_subscription_id)
-            console.log(res);
+            // console.log(res);
             if(res.ok){
                 window.location.href = "/"
             }

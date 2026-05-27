@@ -3,8 +3,11 @@ import DirectoryView from "./DirectoryView";
 import Register from "./Register";
 import "./App.css";
 import Login from "./Login";
-import UsersPage from "./UsersPage";
+import UsersPage from "./AdminDashboard";
 import Plans from "./Plans";
+import ProfileDashboard from "./components/ProfileDashboard";
+import AdminDashboard from "./AdminDashboard";
+import ActionButtons from "./components/test";
 
 const router = createBrowserRouter([
   {
@@ -20,17 +23,25 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/user",
-    element: <UsersPage />,
+    path: "/users",
+     element: <AdminDashboard/>,
   },
   {
     path: "/directory/:dirId",
     element: <DirectoryView />,
   },
   {
-    path: "/plans",
+    path: "/subscriptions",
     element: <Plans />,
   },
+  {
+   path: "/profile",
+   element: <ProfileDashboard/>,
+ },
+ {
+   path: "/test",
+   element: <ActionButtons/>,
+ },
 ]);
 
 function App() {

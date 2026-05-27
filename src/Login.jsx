@@ -111,9 +111,11 @@ const Login = () => {
   const hasError = Boolean(serverError);
 
   return (
-    <div className="container">
-      <h2 className="heading">Login</h2>
-      <form className="form" onSubmit={handleSubmit}>
+    <div className="login-page">
+    <div className="login-card">
+      <h1>Welcome Back</h1>
+      <p className="subtitle">Please sign in to your account</p>
+      <form className="login-form" onSubmit={handleSubmit}>
         {/* Email */}
         <div className="form-group">
           <label htmlFor="email" className="label">
@@ -150,7 +152,7 @@ const Login = () => {
           {serverError && <span className="error-msg">{serverError}</span>}
         </div>
 
-        <button type="submit" className="submit-button">
+        <button type="submit" className="signin-btn">
           Login
         </button>
       </form>
@@ -161,8 +163,8 @@ const Login = () => {
       </p>
 
       {/* or div */}
-      <div className="or">
-        <span>Or</span>
+      <div className="divider">
+        <span>Or continue with</span>
       </div>
 
       {/* google login */}
@@ -185,6 +187,7 @@ const Login = () => {
         // useOneTap
         />
       </div>
+    </div>
     </div>
   );
 };

@@ -7,6 +7,7 @@ import DetailsModal from "./components/DetailsModal";
 import DirectoryList from "./components/DirectoryList";
 import "./DirectoryView.css";
 import { uploadComplete, uploadInitiate } from "./services/s3.js";
+import CreateDirectory from "./components/CreateDirectory.jsx";
 
 function DirectoryView() {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -18,7 +19,7 @@ function DirectoryView() {
   const [errorMessage, setErrorMessage] = useState("");
 
   // Displayed directory name
-  const [directoryName, setDirectoryName] = useState("My Drive");
+  const [directoryName, setDirectoryName] = useState("Home");
 
   // Lists of items
   const [directoriesList, setDirectoriesList] = useState([]);
@@ -72,9 +73,9 @@ function DirectoryView() {
 
       // Set directory name
       if (data._doc.name) {
-        setDirectoryName(dirId ? data._doc.name : "My Drive");
+        setDirectoryName(dirId ? data._doc.name : "Home");
       } else {
-        setDirectoryName("My Drive");
+        setDirectoryName("Home");
       }
 
       // Reverse the directories and files so new items are on top
@@ -206,7 +207,7 @@ function DirectoryView() {
 
       if (res.status === 413) {
         setErrorMessage("File size is excedding max limit");
-        setFilesList((prev) => prev.filter((f) => f.name !== file.name ));
+        setFilesList((prev) => prev.filter((f) => f.name !== file.name));
         setUploadItem(null);
         setTimeout(() => setErrorMessage(""), 3000);
       }
@@ -475,16 +476,14 @@ function DirectoryView() {
         "Directory not found or you do not have access to it!" && (
           <div className="error-message">{errorMessage}</div>
         )}
-      <DirectoryHeader
+      <DirectoryHeader />
+      
+      <CreateDirectory
         directoryName={directoryName}
         onCreateFolderClick={() => setShowCreateDirModal(true)}
         onUploadFilesClick={() => fileInputRef.current.click()}
         fileInputRef={fileInputRef}
         handleFileSelect={handleFileSelect}
-        disabled={
-          errorMessage ===
-          "Directory not found or you do not have access to it!"
-        }
       />
 
       {/* Create Directory Modal */}

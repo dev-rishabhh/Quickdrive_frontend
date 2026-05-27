@@ -1,44 +1,120 @@
-/* Container */
-.container {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-}
 
-/* Heading */
-.heading {
-  text-align: center;
-  margin-bottom: 20px;
-}
 
-/* Form */
-.form {
+.login-page {
+  background: #edf1ff;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Form Group */
-.form-group {
-  position: relative;
-  /* Allows absolute positioning of the error message */
-  margin-bottom: 20px;
+.login-card {
+  width: 450px;
+  background: #fff;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  text-align: center;
 }
 
-/* Labels */
-.label {
+.login-card h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0d1321;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #666;
+  margin-bottom: 15px;
+}
+
+
+.line {
+  width: 40px;
+  height: 2px;
+  background: #d3d3d3;
+  margin: 0 10px;
+}
+
+.login-form {
+  text-align: left;
+}
+
+.login-form label {
   display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+  margin-bottom: 8px;
+  margin-top: 18px;
+  font-size: 14px;
+  color: #222;
 }
 
-/* Inputs */
-.input {
+.login-form input {
   width: 100%;
-  padding: 8px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 16px;
+  border: 1px solid #d8d8d8;
+  border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
 }
+
+.login-form input:focus {
+  border-color: #4f39f6;
+}
+
+.signin-btn {
+  width: 100%;
+  padding: 16px;
+  margin-top: 24px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(to right, #4f39f6, #5138ee);
+  color: white;
+  font-size: 17px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.signin-btn:hover {
+  opacity: 0.9;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 28px 0;
+  color: #888;
+  font-size: 14px;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #ddd;
+}
+
+.divider span {
+  margin: 0 12px;
+}
+
+
+.signup-text {
+  margin-top: 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+.signup-text a {
+  color: #4f39f6;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+
+
 
 /* Red border when there's an error */
 .input-error {

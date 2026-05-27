@@ -1,0 +1,59 @@
+/* Content */
+.content-wrapper {
+  padding: 20px 0px;
+}
+
+/* Card */
+.directory-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.features-list {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.actions-container {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 24px;
+  border-radius: 10px;
+  flex-wrap: wrap;
+}
+.actions-container .btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+
+.icon {
+  font-size: 16px;
+}
+
+/* Upload button */
+.upload-btn {
+  background: #1f5eff;
+  color: white;
+}
+
+/* Create directory button */
+.create-btn {
+  background: #0aa63f;
+  color: white;
+}

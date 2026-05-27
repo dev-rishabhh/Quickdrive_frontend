@@ -1,3 +1,6 @@
+import { FaEdit } from "react-icons/fa";
+import { MdDelete, MdDetails, MdDownload } from "react-icons/md";
+
 function ContextMenu({
   item,
   contextMenuPos,
@@ -20,20 +23,20 @@ function ContextMenu({
           className="context-menu-item"
           onClick={() => openDetailsModal(item)}
         >
-          Details
+         <MdDetails/> Details
         </div>
         
         <div
           className="context-menu-item"
           onClick={() => openRenameModal("directory", item.id, item.name)}
         >
-          Rename
+          <FaEdit/> Rename
         </div>
         <div
           className="context-menu-item"
           onClick={() => handleDeleteDirectory(item.id)}
         >
-          Delete
+        <MdDelete/> Delete
         </div>
       </div>
     );
@@ -65,7 +68,7 @@ function ContextMenu({
             className="context-menu-item"
             onClick={() => openDetailsModal(item)}
           >
-            Details
+           <MdDetails/> Details
           </div>
           <div
             className="context-menu-item"
@@ -73,19 +76,19 @@ function ContextMenu({
               (window.location.href = `${BASE_URL}/file/${item.id}?action=download`)
             }
           >
-            Download
+           <MdDownload/> Download
           </div>
           <div
             className="context-menu-item"
             onClick={() => openRenameModal("file", item.id, item.name)}
           >
-            Rename
+           <FaEdit/>  Rename
           </div>
           <div
             className="context-menu-item"
             onClick={() => handleDeleteFile(item.id)}
           >
-            Delete
+            <MdDelete/> Delete
           </div>
         </div>
       );

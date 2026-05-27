@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { fileSize } from "../services/fileSize.js";
-
+import "./DetailsModal.css"
 function DetailsModal({ item, onClose }) {
 
   useEffect(() => {
@@ -29,12 +29,23 @@ function DetailsModal({ item, onClose }) {
   return (
     <div className="modal-overlay" onClick={handleOverlayClick}>
       <div className="modal-content">
-        <h2 className="center">Details</h2>
-        <p>Name : {item.name} </p>
-        <p>Path : </p>
-        <p>Size : {fileSize(item.size)}</p>
-        <p>Created At  : {new Date(item.createdAt).toLocaleString()}</p>
-        <p>Updated At  : {new Date(item.updatedAt).toLocaleString()}</p>
+        <h2>Details</h2>
+        <div className="detail">
+          <p className="detail-type">Name</p>
+          <p className="detail-value">{item.name}</p>
+        </div>
+        <div className="detail">
+          <p className="detail-type">Size</p>
+          <p className="detail-value">{fileSize(item.size)}</p>
+        </div>
+         <div className="detail">
+          <p className="detail-type">Created At </p>
+          <p className="detail-value">{new Date(item.createdAt).toLocaleString()}</p>
+        </div>
+         <div className="detail">
+          <p className="detail-type">Updated At </p>
+          <p className="detail-value">{new Date(item.updatedAt).toLocaleString()}</p>
+        </div>
       </div>
     </div>
   );

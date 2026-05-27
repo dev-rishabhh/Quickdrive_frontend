@@ -1,0 +1,16 @@
+.modal-content h2{
+padding: 12px;
+}
+
+.detail{
+padding: 12px;
+display: flex;
+justify-content: space-between;
+}
+
+.detail-type{
+color:gray
+}
+.detail-value{
+font-weight: bold;
+}

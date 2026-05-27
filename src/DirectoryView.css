@@ -1,7 +1,7 @@
 .directory-view {
   padding-inline: 10px;
-  max-width: 1000px;
   margin-inline: auto;
+   /* max-width: 1000px; */
 }
 
 /* Header */
@@ -85,6 +85,7 @@
 /* List */
 .directory-list {
   display: flex;
+  justify-content: center;
   flex-direction: column;
   gap: 10px;
   margin-top: 20px;

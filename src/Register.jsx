@@ -173,154 +173,157 @@ const Register = () => {
   // });
 
   return (
-    <div className="container">
-      <h2 className="heading">Register</h2>
-      <form className="form" onSubmit={handleSubmit}>
-        {/* Name */}
-        <div className="form-group">
-          <label htmlFor="name" className="label">
-            Name
-          </label>
-          <input
-            className="input"
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="Enter your name"
-            required
-          />
-        </div>
-
-        {/* Email  & OTP*/}
-        <div className="form-group">
-          <label htmlFor="email" className="label">
-            Email
-          </label>
-          <div className="otp-wrapper">
+   <div className="login-page">
+    <div className="login-card">
+      <h1>Create Account</h1>
+      <p className="subtitle">Enter Details to get started</p>
+        <form className="login-form" onSubmit={handleSubmit}>
+          {/* Name */}
+          <div className="form-group">
+            <label htmlFor="name" className="label">
+              Name
+            </label>
             <input
-              // If there's a serverError, add an extra class to highlight border
-              className={`input ${serverError ? "input-error" : ""}`}
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
+              className="input"
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
               onChange={handleChange}
-              placeholder="Enter your email"
+              placeholder="Enter your name"
               required
             />
-            <button
-              className="otp-btn"
-              disabled={issending || countDown > 0 || isverified}
-              onClick={handleSendOtp}
-            >
-              {
-                issending ? "Sending..." :
-                  countDown > 0
-                    ? `${countDown}s`
-                    : "Send OTP"
-              }
-            </button>
           </div>
-          {/* Absolutely-positioned error message below email field */}
-          {serverError && <span className="error-msg">{serverError}</span>}
-        </div>
 
-        {/* Otp & Verify */}
-        {otpSent &&
+          {/* Email  & OTP*/}
           <div className="form-group">
-            <label htmlFor="otp" className="label">
-              Enter OTP
+            <label htmlFor="email" className="label">
+              Email
             </label>
             <div className="otp-wrapper">
               <input
-                // If there's a otpError, add an extra class to highlight border
-                className={`input ${otpError ? "input-error" : ""}`}
-                type="number"
-                id="otp"
-                name="otp"
-                value={otp}
-                onChange={(e) => setOtp(e.target.value)}
-                placeholder="Enter the OTP"
+                // If there's a serverError, add an extra class to highlight border
+                className={`input ${serverError ? "input-error" : ""}`}
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Enter your email"
                 required
               />
               <button
                 className="otp-btn"
-                disabled={isverified || isverified}
-                onClick={handleVerifyOtp}
+                disabled={issending || countDown > 0 || isverified}
+                onClick={handleSendOtp}
               >
                 {
-                  isverifying ? "Verifying..."
-                    : isverified
-                      ? "Verified"
-                      : "Verify OTP"
+                  issending ? "Sending..." :
+                    countDown > 0
+                      ? `${countDown}s`
+                      : "Send OTP"
                 }
               </button>
             </div>
             {/* Absolutely-positioned error message below email field */}
-            {otpError && <span className="error-msg">{otpError}</span>}
+            {serverError && <span className="error-msg">{serverError}</span>}
           </div>
-        }
 
-        {/* Password */}
-        <div className="form-group">
-          <label htmlFor="password" className="label">
-            Password
-          </label>
-          <input
-            className="input"
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            placeholder="Enter your password"
-            required
+          {/* Otp & Verify */}
+          {otpSent &&
+            <div className="form-group">
+              <label htmlFor="otp" className="label">
+                Enter OTP
+              </label>
+              <div className="otp-wrapper">
+                <input
+                  // If there's a otpError, add an extra class to highlight border
+                  className={`input ${otpError ? "input-error" : ""}`}
+                  type="number"
+                  id="otp"
+                  name="otp"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                  placeholder="Enter the OTP"
+                  required
+                />
+                <button
+                  className="otp-btn"
+                  disabled={isverified || isverified}
+                  onClick={handleVerifyOtp}
+                >
+                  {
+                    isverifying ? "Verifying..."
+                      : isverified
+                        ? "Verified"
+                        : "Verify OTP"
+                  }
+                </button>
+              </div>
+              {/* Absolutely-positioned error message below email field */}
+              {otpError && <span className="error-msg">{otpError}</span>}
+            </div>
+          }
+
+          {/* Password */}
+          <div className="form-group">
+            <label htmlFor="password" className="label">
+              Password
+            </label>
+            <input
+              className="input"
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={!isverified || isSuccess}
+            className={`submit-button ${isSuccess ? "success" : ""}`}
+          >
+            {isSuccess ? "Registration Successful" : "Register"}
+          </button>
+        </form>
+
+        {/* Link to the login page */}
+        < p className="link-text" >
+          Already have an account ? <Link to="/login">Login</Link>
+        </p >
+        
+        {/* or div */}
+      <div className="divider">
+        <span>Or continue with</span>
+      </div>
+
+        {/* google login */}
+
+        <div className="google-login">
+          <GoogleLogin
+            onSuccess={async (credentialResponse) => {
+              const data = await verifyIdToken(credentialResponse.credential)
+              if (data.message) {
+                navigate("/")
+              }
+            }}
+            shape="pill"
+            theme="filled_blue"
+            text="continue_with"
+
+            onError={() => {
+              console.log("Login Failed");
+            }}
+          // useOneTap
           />
         </div>
 
-        <button
-          type="submit"
-          disabled={!isverified || isSuccess}
-          className={`submit-button ${isSuccess ? "success" : ""}`}
-        >
-          {isSuccess ? "Registration Successful" : "Register"}
-        </button>
-      </form>
-
-      {/* Link to the login page */}
-      < p className="link-text" >
-        Already have an account ? <Link to="/login">Login</Link>
-      </p >
-      {/* or div */}
-      {/* or div */}
-      <div className="or">
-        <span>Or</span>
-      </div>
-
-      {/* google login */}
-
-      <div className="google-login">
-        <GoogleLogin
-          onSuccess={async (credentialResponse) => {
-            const data = await verifyIdToken(credentialResponse.credential)
-            if (data.message) {
-              navigate("/")
-            }
-          }}
-          shape="pill"
-          theme="filled_blue"
-          text="continue_with"
-
-          onError={() => {
-            console.log("Login Failed");
-          }}
-        // useOneTap
-        />
-      </div>
-
-    </div >
+      </div >
+    </div>
   );
 };
 

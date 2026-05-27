@@ -1,0 +1,189 @@
+/* ProfileDashboard.css */
+
+.user-page {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* CARD */
+.card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.card-title{
+    display: flex;
+    padding: 12px 0px;
+    align-items: center;
+    gap: 12px
+}
+
+
+/* STORAGE */
+.storage-top {
+  display: flex;
+  padding: 4px 0px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+
+.warning-text {
+  margin-top: 6px;
+  color: #d97706;
+  font-size: 14px;
+}
+
+.usage-badge {
+  /* background: #fef3c7; */
+  color: #d97706;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #eab308;
+  border-radius: 999px;
+}
+
+.storage-stats {
+  display: flex;
+  gap: 20px;
+}
+
+.stat-box {
+  flex: 1;
+  /* background: #f9fafb; */
+  border-radius: 12px;
+  padding: 12px 8px;
+}
+
+.stat-box span {
+  display: block;
+  color: #4b5563;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.stat-box strong {
+  font-size: 28px;
+  color: #0f172a;
+}
+
+/* PROFILE */
+.section-title {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #111827;
+}
+
+.profile-upload {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 35px;
+}
+
+.profile-image {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #e5e7eb;
+}
+
+/* FORM */
+.form-group {
+  margin-bottom: 22px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #111827;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  font-weight: 500;
+  outline: none;
+}
+
+.logout-card{
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+}
+
+.logout-card-container{
+    width: 45%;
+     border: 1px solid #d1d5db;
+     padding: 8px 16px;
+     border-radius: 5px;
+}
+.logout-info-container{
+    display: flex;
+    gap: 12px;
+}
+.logout-icon-container{
+    padding: 6px;
+    color: #d97706;
+    border-radius: 50%;
+}
+.logout-all-icon-container{
+    padding: 6px;
+    color: #d60c05;
+    border-radius: 50%;
+}
+.logout-device{
+    margin: 0;
+    font-weight: 600;
+    font-size: 14px;
+}
+.logout-para{
+    margin-top: 4px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: #4b5563;
+}
+.logout-card-btn{
+    background: orangered;
+    color: white;
+    width: 100%;
+    border-radius: 6px;
+    padding: 8px 12px;
+    border: none;
+}
+.logout-all-card-btn{
+    background: #d60c05;
+    color: white;
+    width: 100%;
+    border-radius: 6px;
+    padding: 8px 12px;
+    border: none;
+}
+
+

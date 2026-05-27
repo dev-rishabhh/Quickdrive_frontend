@@ -191,14 +191,14 @@
 
 /* Features */
 
-.features-list {
+.plan-features-list {
   margin-bottom: 1.25rem;
   padding: 0;
 
   list-style: none;
 }
 
-.features-list li + li {
+.plan-features-list li + li {
   margin-top: 0.5rem;
 }
 

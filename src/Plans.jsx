@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import DirectoryHeader from "./components/DirectoryHeader";
 import "./Plans.css"
 import { openRazorpayPopup, subscriptionInitiate } from "./services/razorpay";
 
@@ -126,7 +127,7 @@ function PlanCard({ plan, onSelect }) {
         <span className="period">{plan.period}</span>
       </div>
 
-      <ul className="features-list">
+      <ul className="plan-features-list">
         {plan.features.map((f, i) => (
           <li key={i} className="feature-item">
             <svg
@@ -186,49 +187,56 @@ export default function Plans() {
   }
 
   return (
-    <div className="plans-container">
-      <div className="error-message">{errorMessage}</div>
-      <header className="plans-header">
-        <h1 className="main-title">Choose your plan</h1>
-        <Link to="/">Home</Link>
-      </header>
+    <>
 
-      <div className="tabs">
-        <button
-          onClick={() => setMode("monthly")}
-          className={`tab-btn ${mode === "monthly" ? "active-tab" : ""
-            }`}
-        >
-          Monthly
-        </button>
+    {/* Header */}
+    <DirectoryHeader />
 
-        <button
-          onClick={() => setMode("yearly")}
-          className={`tab-btn ${mode === "yearly" ? "active-tab" : ""
-            }`}
-        >
-          Yearly
-          <span className="discount-text">
-            (2 months off)
-          </span>
-        </button>
+    {/* Content */}
+      <div className="plans-container">
+        <div className="error-message">{errorMessage}</div>
+        <header className="plans-header">
+          <h1 className="main-title">Choose your plan</h1>
+          <Link to="/">Home</Link>
+        </header>
+
+        <div className="tabs">
+          <button
+            onClick={() => setMode("monthly")}
+            className={`tab-btn ${mode === "monthly" ? "active-tab" : ""
+              }`}
+          >
+            Monthly
+          </button>
+
+          <button
+            onClick={() => setMode("yearly")}
+            className={`tab-btn ${mode === "yearly" ? "active-tab" : ""
+              }`}
+          >
+            Yearly
+            <span className="discount-text">
+              (2 months off)
+            </span>
+          </button>
+        </div>
+
+        <div className="plans-grid">
+          {plans.map((plan) => (
+            <PlanCard
+              key={`${mode}-${plan.id}`}
+              plan={plan}
+              onSelect={handleSelect}
+            />
+          ))}
+        </div>
+
+        <p className="helper-text">
+          Prices are indicative for demo. Integrate with Razorpay
+          Subscriptions to start billing.
+        </p>
       </div>
-
-      <div className="plans-grid">
-        {plans.map((plan) => (
-          <PlanCard
-            key={`${mode}-${plan.id}`}
-            plan={plan}
-            onSelect={handleSelect}
-          />
-        ))}
-      </div>
-
-      <p className="helper-text">
-        Prices are indicative for demo. Integrate with Razorpay
-        Subscriptions to start billing.
-      </p>
-    </div>
+    </>
 
   );
 }

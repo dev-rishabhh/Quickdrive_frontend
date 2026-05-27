@@ -3,33 +3,29 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaFolderPlus, FaSignInAlt, FaSignOutAlt, FaUpload, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { MdAccountBox, MdSubscriptions } from "react-icons/md"
+import "./DirectoryHeader.css";
 
 
-function DirectoryHeader({
-  directoryName,
-  onCreateFolderClick,
-  onUploadFilesClick,
-  fileInputRef,
-  handleFileSelect,
-}) {
+function DirectoryHeader() {
   // Use a constant for the API base URL
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-
-
-  const [showUserMenu, setShowUserMenu] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userName, setUserName] = useState("Guest User");
   const [userEmail, setUserEmail] = useState("guest@example.com");
   const [userPicture, setUserPicture] = useState("");
   const [usedStorageinBytes, setusedStorageinBytes] = useState(0);
   const [maxStorageinBytes, setmaxStorageinBytes] = useState(0);
+  const [userRole, setUserRole] = useState("user");
 
-  const userMenuRef = useRef(null);
   const navigate = useNavigate();
 
   const usedGB = usedStorageinBytes / 1024 ** 3
   const totalGB = maxStorageinBytes / 1024 ** 3
+
+  // console.log(directoryName);
+
 
   // -------------------------------------------
   // 1. Fetch user info from /user on mount
@@ -48,6 +44,7 @@ function DirectoryHeader({
           setUserPicture(data.picture)
           setusedStorageinBytes(data.usedStorageinBytes)
           setmaxStorageinBytes(data.maxStorageinBytes)
+          setUserRole(data.role)
           setLoggedIn(true);
         } else if (response.status === 401) {
           // User not logged in
@@ -66,191 +63,60 @@ function DirectoryHeader({
     fetchUser();
   }, [BASE_URL]);
 
-  // -------------------------------------------
-  // 2. Toggle user menu
-  // -------------------------------------------
-  const handleUserIconClick = () => {
-    setShowUserMenu((prev) => !prev);
-  };
-
-  // -------------------------------------------
-  // 3. Logout handler
-  // -------------------------------------------
-  const handleLogout = async () => {
-    try {
-      const response = await fetch(`${BASE_URL}/user/logout`, {
-        method: "POST",
-        credentials: "include",
-      });
-      if (response.ok) {
-        console.log("Logged out successfully");
-        // Optionally reset local state
-        setLoggedIn(false);
-        setUserName("Guest User");
-        setUserEmail("guest@example.com");
-        navigate("/login");
-      } else {
-        console.error("Logout failed");
-      }
-    } catch (err) {
-      console.error("Logout error:", err);
-    } finally {
-      setShowUserMenu(false);
-    }
-  };
-  // -------------------------------------------
-  // 3. Logout-All handler
-  // -------------------------------------------
-  const handleLogoutAll = async () => {
-    try {
-      const response = await fetch(`${BASE_URL}/user/logout-all`, {
-        method: "POST",
-        credentials: "include",
-      });
-      if (response.ok) {
-        console.log("Logged out successfully");
-        // Optionally reset local state
-        setLoggedIn(false);
-        setUserName("Guest User");
-        setUserEmail("guest@example.com");
-        navigate("/login");
-      } else {
-        console.error("Logout failed");
-      }
-    } catch (err) {
-      console.error("Logout error:", err);
-    } finally {
-      setShowUserMenu(false);
-    }
-  };
-
-  // -------------------------------------------
-  // 4. Close menu on outside click
-  // -------------------------------------------
-  useEffect(() => {
-    function handleDocumentClick(e) {
-      if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
-        setShowUserMenu(false);
-      }
-    }
-    document.addEventListener("mousedown", handleDocumentClick);
-    return () => {
-      document.removeEventListener("mousedown", handleDocumentClick);
-    };
-  }, []);
-
-
 
   return (
-    <header className="directory-header">
-      <h1>{directoryName}</h1>
-      <div className="header-links">
-        {/* Create Folder (icon button) */}
-        <button
-          className="icon-button"
-          title="Create Folder"
-          onClick={onCreateFolderClick}
-        // disabled={disabled}
-        >
-          <FaFolderPlus />
-        </button>
-
-        {/* Upload Files (icon button) */}
-        <button
-          className="icon-button"
-          title="Upload Files"
-          onClick={onUploadFilesClick}
-        // disabled={disabled}
-        >
-          <FaUpload />
-        </button>
-
-        {/* Hidden file input */}
-        <input
-          ref={fileInputRef}
-          id="file-upload"
-          type="file"
-          style={{ display: "none" }}
-          multiple
-          onChange={handleFileSelect}
-        />
-
-        {/* User Icon & Dropdown Menu */}
-        <div className="user-menu-container" ref={userMenuRef}>
-          <button
-            className="icon-button"
-            title="User Menu"
-            onClick={handleUserIconClick}
-          // disabled={disabled}
-          >
-            {userPicture ? (
-              <img className="userPicture" src={userPicture} alt={userName} />
-            ) : (
-              <FaUser />
-            )}
-          </button>
-
-          {showUserMenu && (
-            <div className="user-menu">
-              {loggedIn ? (
-                <>
-                  {/* Display name & email if logged in */}
-                  <div className="user-menu-item user-info">
-                    <span className="user-name">{userName}</span>
-                    <span className="user-email">{userEmail}</span>
-                  </div>
-                  <div className="total-space-cont">
-                    <div className="space-meter">
-                      <div
-                        className="space"
-                        style={{ width: `${(usedGB / totalGB) * 100}%` }}
-                      ></div>
-                    </div>
-                    <div className="text-xs">
-                      {usedGB.toFixed(2)} GB of {totalGB} GB used
-                    </div>
-                  </div>
-                  <div className="user-menu-divider" />
-                  <Link to='/plans'
-                    className="plans-link"
-                  >
-                    Get More Storage
-                  </Link>
-                  <div
-                    className="user-menu-item login-btn"
-                    onClick={handleLogout}
-                  >
-                    <FaSignOutAlt className="menu-item-icon" />
-                    <span>Logout</span>
-                  </div>
-                  <div
-                    className="user-menu-item login-btn"
-                    onClick={handleLogoutAll}
-                  >
-                    <FaSignOutAlt className="menu-item-icon" />
-                    <span>Logout-All</span>
-                  </div>
-                </>
-              ) : (
-                <>
-                  {/* Show Login if not logged in */}
-                  <div
-                    className="user-menu-item login-btn"
-                    onClick={() => {
-                      navigate("/login");
-                      setShowUserMenu(false);
-                    }}
-                  >
-                    <FaSignInAlt className="menu-item-icon" />
-                    <span>Login</span>
-                  </div>
-                </>
-              )}
-            </div>
-          )}
+    <>
+      {/* Header */}
+      <header className="navbar">
+        <div className="logo-section">
+          <div className="logo-box">☁</div>
+          <h2 className="brand-name">Quickdrive</h2>
         </div>
-      </div>
-    </header>
+
+        <div className="nav-actions">
+          <div className="nav-btn">
+            <MdSubscriptions />
+            <Link to="/subscriptions" className="link">Subscriptions</Link>
+          </div>
+
+          <div className="nav-btn">
+            <MdAccountBox />
+            <Link to="/profile" className="link">Profile</Link>
+          </div>
+          {userRole !== "user" &&
+            <div className="nav-btn">
+              <FaUser />
+              <Link to="/users" className="link">Users</Link>
+            </div>
+          }
+
+          <div className="profile-section">
+            <div className="profile-info">
+              <span className="profile-name">{userName}</span>
+              <span className="profile-email">{userEmail}</span>
+              {userRole !== "user" &&
+                <span className="profile-role">({userRole})</span>
+              }
+            </div>
+
+            <div>
+              <button
+                className="icon-button"
+                title="User Menu"
+              // onClick={handleUserIconClick}
+              // disabled={disabled}
+              >
+                {userPicture ? (
+                  <img className="userPicture" src={userPicture} alt={userName} />
+                ) : (
+                  <FaUser />
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+    </>
   );
 }
 

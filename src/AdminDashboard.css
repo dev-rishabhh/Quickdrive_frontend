@@ -1,0 +1,181 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f5f7fb;
+    font-family: Arial, sans-serif;
+}
+
+.dashboard {
+    padding: 24px;
+    color: #1e293b;
+}
+
+.link{
+    text-decoration: none;
+}
+
+/* Banner */
+
+.profile-banner {
+    margin-top: 24px;
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.back-btn {
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: 1px solid #dbe4ff;
+    background: white;
+    cursor: pointer;
+}
+
+.banner-user {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.role-badge {
+    background: #fee2e2;
+    color: #b91c1c;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Table */
+
+.table-section {
+    margin-top: 28px;
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.table-header {
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table-header h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+
+.table-header span {
+    font-size: 14px;
+    color: gray;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #f8fafc;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 18px 24px;
+}
+
+tbody tr {
+    border-top: 1px solid #e2e8f0;
+}
+
+.storage-data {
+    font-size: 12px;
+    color: rgb(83, 83, 83);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 14px;
+    font-size: 14px;
+}
+
+.avatar-small img {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+}
+
+.role-pill {
+    background: #e0f2fe;
+    color: #0369a1;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.online {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.offline {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.logout-btn {
+  padding: 6px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.logout-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.delete-btn {
+    border: none;
+    background: orangered;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.hard-delete-btn {
+    border: none;
+    background: #ef4444;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+}

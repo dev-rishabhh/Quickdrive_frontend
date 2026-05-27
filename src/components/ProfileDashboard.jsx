@@ -102,6 +102,17 @@ const ProfileDashboard = () => {
         }
     };
 
+    // -------------------------------------------
+    // 3. warning text
+    // -------------------------------------------
+    function warningText(percentage) {
+        if (percentage <= 40) return "Enough space available"
+        else if (percentage > 40 && percentage < 70) return "Storage usage is within normal range";
+        else if (percentage > 70 && percentage < 80) return "Storage usage is getting high";
+        else if (percentage > 80 && percentage < 90) return "Space is running low";
+        else return "Storage is nearly full"
+    }
+
     return (
         <>
             {/* Header */}
@@ -122,7 +133,7 @@ const ProfileDashboard = () => {
                                 {usedGB} GB of {totalGB} GB used
                             </p>
 
-                            <p className="warning-text">⚠ Storage is nearly full</p>
+                            <p className="warning-text">{warningText(percentage)}</p>
                         </div>
 
                         <div className="usage-badge">{percentage}% used</div>

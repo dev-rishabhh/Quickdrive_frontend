@@ -7,7 +7,6 @@ import UsersPage from "./AdminDashboard";
 import Plans from "./Plans";
 import ProfileDashboard from "./components/ProfileDashboard";
 import AdminDashboard from "./AdminDashboard";
-import ActionButtons from "./components/test";
 
 const router = createBrowserRouter([
   {
@@ -37,10 +36,6 @@ const router = createBrowserRouter([
   {
    path: "/profile",
    element: <ProfileDashboard/>,
- },
- {
-   path: "/test",
-   element: <ActionButtons/>,
  },
 ]);
 
